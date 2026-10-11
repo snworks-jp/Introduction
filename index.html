@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SN Works - アプリ紹介</title>
-<meta name="description" content="SN Worksが開発・公開しているアプリの紹介ページ一覧です。">
+<meta name="description" content="SN Worksが開発・公開しているアプリの紹介と、全国の演奏会カレンダーです。">
 <link rel="canonical" href="https://snworks-jp.github.io/Introduction/">
 <style>
   :root {
@@ -56,6 +56,8 @@
   .note .tag { display: inline-block; margin-top: 14px; padding: 4px 14px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 13px; font-weight: 700; }
   .app { background: var(--yellow); --tilt: -.5deg; }
   .app .d { color: #3b3410; }
+  .cal { background: var(--mint); --tilt: .5deg; }
+  .cal .d { color: #0b3d2d; }
   .r1 { background: #fff; --tilt: 1deg; border-top: 8px solid var(--blue); }
   .r2 { background: #fff; --tilt: -1deg; border-top: 8px solid var(--mint); }
   .r1 strong, .r2 strong { font-size: 18px; }
@@ -79,7 +81,7 @@
     <div>
       <h1>SN Works</h1>
       <p class="catch">音楽を続ける人の、ちょうどいい道具を作っています。</p>
-      <p class="lede">ここは、アプリの紹介ページです。</p>
+      <p class="lede">アプリの紹介と、演奏会カレンダーと、ちょっとしたBLOG</p>
     </div>
     <div class="art" aria-hidden="true">
       <svg viewBox="0 0 340 340">
@@ -114,6 +116,19 @@
           <strong>楽譜管理アプリ ScoreMate</strong>
           <span class="d">演奏会・楽曲・パート・作曲家をまとめて管理。PDFの楽譜も、YouTubeの動画も、アプリの中で開けます。</span>
           <span class="tag">Windows向け・買い切り580円</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="concerts">
+    <h2 id="concerts">演奏会情報</h2>
+    <ul class="notes">
+      <li>
+        <a class="note cal" href="pages/concert-calendar.html">
+          <strong>演奏会カレンダー</strong>
+          <span class="d">全国の演奏会を、日付で探せます。あなたの演奏会も投稿できます（確認してから掲載します）。</span>
+          <span class="tag">無料</span>
         </a>
       </li>
     </ul>
