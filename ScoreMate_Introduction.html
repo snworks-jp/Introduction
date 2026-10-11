@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ScoreMate - 楽譜管理・検索アプリ（演奏会・楽曲・パート対応）</title>
+<meta name="description" content="ScoreMateは、演奏会・楽曲・パート・作曲家をまとめて管理できるWindows向け楽譜管理アプリ。PDF楽譜もYouTube動画もアプリ内で開け、曲名の一部だけで楽譜を検索できます。買い切り580円。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ScoreMate - 楽譜管理・検索アプリ">
+<meta property="og:description" content="演奏会・楽曲・パート・作曲家をまとめて管理。PDF楽譜もYouTube動画もアプリ内で開ける楽譜管理アプリ。買い切り580円。">
+<meta property="og:image" content="https://store-images.s-microsoft.com/image/apps.60982.13889870658234216.f99d8bd9-7b39-4d26-a2e7-de1bbe53466d.5909aa06-7134-4772-b83d-2e7971301107">
+<meta property="og:locale" content="ja_JP">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ScoreMate",
+  "alternateName": "ScoreMate（スコアメイト）",
+  "applicationCategory": "MusicApplication",
+  "operatingSystem": "Windows 10, Windows 11",
+  "description": "演奏会・楽曲・パート・作曲家をまとめて管理できる楽譜管理アプリ。PDF楽譜とYouTube動画をアプリ内で開け、曲名や作曲家名の一部で検索できます。",
+  "inLanguage": "ja",
+  "screenshot": ["https://store-images.s-microsoft.com/image/apps.3932.13889870658234216.3d4f019c-c857-4cba-bd1f-a9a103e07e68.8d1fae5f-646c-4206-a93b-6eab18968d39", "https://store-images.s-microsoft.com/image/apps.44803.13889870658234216.3d4f019c-c857-4cba-bd1f-a9a103e07e68.a31e81ad-2cd5-4886-947b-9b23d61a5733", "https://store-images.s-microsoft.com/image/apps.33868.13889870658234216.3d4f019c-c857-4cba-bd1f-a9a103e07e68.19fec62d-c94b-4185-87e3-059213f312c9"],
+  "url": "https://apps.microsoft.com/detail/9MXH6PHVT0MZ",
+  "offers": { "@type": "Offer", "price": "580", "priceCurrency": "JPY" },
+  "author": { "@type": "Organization", "name": "SN Works" }
+}
+</script>
+<style>
+  :root {
+    --bg: #faf7f2;
+    --surface: #ffffff;
+    --ink: #2a2622;
+    --muted: #6b6359;
+    --line: #e6dfd3;
+    --accent: #8a3b2e;
+    --accent-ink: #ffffff;
+    --soft: #f1e9dc;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --surface: #26221f;
+      --ink: #f1ebe2;
+      --muted: #a89f93;
+      --line: #3a342f;
+      --accent: #d9826f;
+      --accent-ink: #1c1917;
+      --soft: #2f2a26;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+    line-height: 1.8;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+  header { padding: 56px 0 40px; border-bottom: 1px solid var(--line); }
+  .eyebrow { margin: 0 0 12px; font-size: 14px; color: var(--muted); letter-spacing: .06em; }
+  h1 { margin: 0 0 16px; font-size: clamp(30px, 6vw, 44px); line-height: 1.25; letter-spacing: .01em; }
+  h1 .tag { display: block; margin-top: 8px; font-size: clamp(22px, 5vw, 32px); line-height: 1.4; text-wrap: balance; }
+  .lead { margin: 0 0 28px; font-size: 18px; color: var(--ink); }
+  .cta {
+    display: inline-block;
+    padding: 14px 28px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .cta:hover { opacity: .9; }
+  .cta:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .meta { margin: 14px 0 0; font-size: 14px; color: var(--muted); }
+  section { padding: 44px 0 8px; }
+  h2 { margin: 0 0 20px; font-size: 24px; line-height: 1.4; }
+  .cards { display: grid; gap: 14px; grid-template-columns: 1fr; padding: 0; margin: 0; list-style: none; }
+  @media (min-width: 640px) { .cards { grid-template-columns: 1fr 1fr; } }
+  .cards li {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .cards h3 { margin: 0 0 6px; font-size: 17px; }
+  .cards p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
+  ul.plain { margin: 0; padding-left: 1.2em; }
+  ul.plain li { margin: 6px 0; }
+  .shots { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }
+  .shots figure { flex: 0 0 68%; margin: 0; scroll-snap-align: start; }
+  @media (min-width: 640px) { .shots { overflow: visible; } .shots figure { flex: 1 1 0; } }
+  .shots img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--soft); }
+  .shots figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .note {
+    margin-top: 24px;
+    padding: 14px 18px;
+    background: var(--soft);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  dl { margin: 0; }
+  dt { font-weight: 700; margin-top: 18px; }
+  dd { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
+  .bottom { text-align: center; padding: 48px 0 24px; }
+  footer { padding: 28px 0 56px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Windows向け 楽譜管理アプリ</p>
+    <h1>ScoreMate<span class="tag">楽譜も、演奏会の記録も、<wbr>ひとつにまとめて管理。</span></h1>
+    <p class="lead">曲名や作曲家名の一部を入力するだけで、探している楽譜がすぐ見つかります。吹奏楽部・楽団・合奏団のように、楽譜がたくさんある方のための楽譜管理・楽譜検索アプリです。</p>
+    <a class="cta" href="https://apps.microsoft.com/detail/9MXH6PHVT0MZ">Microsoft Storeで入手する</a>
+    <p class="meta">買い切り 580円（サブスクリプションなし）</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section aria-labelledby="register">
+    <h2 id="register">登録できる情報</h2>
+    <ul class="cards">
+      <li>
+        <h3>演奏会</h3>
+        <p>パンフレットの画像や写真を登録できます。演奏会ごとに、演奏した曲をまとめて残せます。</p>
+      </li>
+      <li>
+        <h3>楽曲</h3>
+        <p>PDFの楽譜を登録して、アプリ内で開けます。YouTubeのリンクを登録すれば、アプリ内でそのまま再生できます。</p>
+      </li>
+      <li>
+        <h3>パート</h3>
+        <p>パートごとに楽譜を整理できます。自分のパート譜をすぐ見つけられます。</p>
+      </li>
+      <li>
+        <h3>作曲家</h3>
+        <p>作曲家から楽曲をたどれます。同じ作曲家の曲をまとめて見返せます。</p>
+      </li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="shots">
+    <h2 id="shots">画面イメージ</h2>
+    <div class="shots">
+      <figure><img src="https://store-images.s-microsoft.com/image/apps.3932.13889870658234216.3d4f019c-c857-4cba-bd1f-a9a103e07e68.8d1fae5f-646c-4206-a93b-6eab18968d39" width="648" height="1100" loading="lazy" alt="ScoreMateの演奏会の詳細画面。プログラム（パンフレット）の画像と写真を登録した例"><figcaption>演奏会ごとに、プログラムと写真を登録</figcaption></figure>
+      <figure><img src="https://store-images.s-microsoft.com/image/apps.44803.13889870658234216.3d4f019c-c857-4cba-bd1f-a9a103e07e68.a31e81ad-2cd5-4886-947b-9b23d61a5733" width="648" height="1100" loading="lazy" alt="ScoreMateの演奏会の曲リスト。曲ごとに再生ボタンがある画面"><figcaption>演奏した曲を一覧で管理</figcaption></figure>
+      <figure><img src="https://store-images.s-microsoft.com/image/apps.33868.13889870658234216.3d4f019c-c857-4cba-bd1f-a9a103e07e68.19fec62d-c94b-4185-87e3-059213f312c9" width="648" height="1100" loading="lazy" alt="ScoreMateの検索欄と演奏会の一覧。演奏会・曲名・パート・作曲家のタブで切り替える画面"><figcaption>検索欄と、4つのタブで切り替え</figcaption></figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="search">
+    <h2 id="search">一部の文字だけで探せる楽譜検索</h2>
+    <p>曲名や作曲家名を最後まで覚えていなくても、思い出せる部分だけを入力すれば候補が表示されます。「あの曲、どこにしまったっけ？」を減らします。</p>
+  </section>
+
+  <section aria-labelledby="for">
+    <h2 id="for">こんな方におすすめ</h2>
+    <ul class="plain">
+      <li>吹奏楽部、楽団、合奏団でたくさんの楽譜を管理している方</li>
+      <li>演奏会ごとにパンフレットや演奏曲をまとめて残したい方</li>
+      <li>楽譜とお手本の演奏動画を一緒に管理したい方</li>
+    </ul>
+    <p class="note">本アプリは楽譜そのものを収録・配布するものではありません。お手持ちの楽譜の管理にお使いください。</p>
+  </section>
+
+  <section aria-labelledby="faq">
+    <h2 id="faq">よくある質問</h2>
+    <dl>
+      <dt>どこで入手できますか？</dt>
+      <dd>Microsoft Store（Windows 10 / 11）で配信しています。上のボタンからストアのページを開けます。</dd>
+      <dt>料金はいくらですか？</dt>
+      <dd>買い切り580円です。月額や年額の費用はかかりません。</dd>
+      <dt>楽譜は付いていますか？</dt>
+      <dd>いいえ。お手持ちの楽譜（PDFなど）を登録して使うアプリです。</dd>
+      <dt>検索はどんな仕組みですか？</dt>
+      <dd>曲名や作曲家名などの一部を入力する、部分一致の検索です。ひらがな・カタカナなどの表記ゆれには対応していません。</dd>
+    </dl>
+  </section>
+
+  <div class="bottom">
+    <a class="cta" href="https://apps.microsoft.com/detail/9MXH6PHVT0MZ">Microsoft Storeで入手する</a>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap">© 2026 SN Works</div>
+</footer>
+
+</body>
+</html>
