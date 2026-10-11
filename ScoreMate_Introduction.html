@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ScoreMate - 楽譜管理・検索アプリ（演奏会・楽曲・パート対応）</title>
-<meta name="description" content="ScoreMateは、演奏会・楽曲・パート・作曲家をまとめて管理できるWindows向け楽譜管理アプリ。PDF楽譜もYouTube動画もアプリ内で開け、曲名の一部だけで楽譜を検索できます。買い切り580円。">
+<meta name="description" content="部活や趣味の楽譜、演奏会のプログラムや写真をひとつにまとめて管理できるWindows向け楽譜管理アプリ ScoreMate。PDF楽譜もYouTube動画もアプリ内で開け、曲名の一部だけで楽譜を検索できます。買い切り580円。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ScoreMate - 楽譜管理・検索アプリ">
-<meta property="og:description" content="演奏会・楽曲・パート・作曲家をまとめて管理。PDF楽譜もYouTube動画もアプリ内で開ける楽譜管理アプリ。買い切り580円。">
+<meta property="og:description" content="楽譜も、演奏会のプログラムや写真も、ひとつにまとめて管理。PDF楽譜もYouTube動画もアプリ内で開ける楽譜管理アプリ。買い切り580円。">
 <meta property="og:image" content="https://store-images.s-microsoft.com/image/apps.60982.13889870658234216.f99d8bd9-7b39-4d26-a2e7-de1bbe53466d.5909aa06-7134-4772-b83d-2e7971301107">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:url" content="https://snworks-jp.github.io/Introduction/ScoreMate_Introduction.html">
@@ -97,6 +97,10 @@
   @media (min-width: 640px) { .shots { overflow: visible; } .shots figure { flex: 1 1 0; } }
   .shots img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--soft); }
   .shots figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .steps { margin: 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 12px; }
+  .steps li { counter-increment: s; position: relative; padding: 16px 20px 16px 60px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; color: var(--muted); font-size: 15px; line-height: 1.7; }
+  .steps li::before { content: counter(s); position: absolute; left: 18px; top: 14px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-weight: 700; text-align: center; line-height: 28px; }
+  .steps strong { display: block; color: var(--ink); font-size: 17px; }
   .note {
     margin-top: 24px;
     padding: 14px 18px;
@@ -118,7 +122,7 @@
   <div class="wrap">
     <p class="eyebrow">Windows向け 楽譜管理アプリ</p>
     <h1>ScoreMate<span class="tag">楽譜も、演奏会の記録も、<wbr>ひとつにまとめて管理。</span></h1>
-    <p class="lead">曲名や作曲家名の一部を入力するだけで、探している楽譜がすぐ見つかります。吹奏楽部・楽団・合奏団のように、楽譜がたくさんある方のための楽譜管理・楽譜検索アプリです。</p>
+    <p class="lead">部活や楽団の楽譜、演奏会のプログラムや写真が、あちこちに散らばっていませんか。ScoreMateなら、曲名や作曲家名の一部を入力するだけで、探している楽譜がすぐ見つかります。</p>
     <a class="cta" href="https://apps.microsoft.com/detail/9MXH6PHVT0MZ">Microsoft Storeで入手する</a>
     <p class="meta">買い切り 580円（サブスクリプションなし）</p>
   </div>
@@ -162,11 +166,42 @@
     <p>曲名や作曲家名を最後まで覚えていなくても、思い出せる部分だけを入力すれば候補が表示されます。「あの曲、どこにしまったっけ？」を減らします。</p>
   </section>
 
+  <section aria-labelledby="scenes">
+    <h2 id="scenes">こんなときに</h2>
+    <ul class="cards">
+      <li>
+        <h3>パート譜をすぐ開きたい</h3>
+        <p>パートで整理しておけば、自分のパート譜をすぐ見つけてアプリ内で開けます。</p>
+      </li>
+      <li>
+        <h3>演奏会の思い出を残したい</h3>
+        <p>演奏会ごとに、プログラムの画像や写真を登録して、演奏した曲と一緒に残せます。</p>
+      </li>
+      <li>
+        <h3>曲名をうろ覚えのとき</h3>
+        <p>思い出せる一部の文字を入力すれば、候補が表示されます。</p>
+      </li>
+      <li>
+        <h3>お手本の演奏も一緒に見たい</h3>
+        <p>YouTubeのリンクを登録しておけば、楽譜と同じアプリで再生できます。</p>
+      </li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="steps">
+    <h2 id="steps">使い方は3ステップ</h2>
+    <ol class="steps">
+      <li><strong>登録する</strong>演奏会、楽曲（PDFやYouTubeのリンク）、パート、作曲家を登録します。</li>
+      <li><strong>探す</strong>検索欄に、曲名や作曲家名の一部を入力します。</li>
+      <li><strong>開く</strong>見つけた楽曲のPDF楽譜を、アプリ内で開きます。</li>
+    </ol>
+  </section>
+
   <section aria-labelledby="for">
     <h2 id="for">こんな方におすすめ</h2>
     <ul class="plain">
-      <li>吹奏楽部、楽団、合奏団でたくさんの楽譜を管理している方</li>
-      <li>演奏会ごとにパンフレットや演奏曲をまとめて残したい方</li>
+      <li>吹奏楽部、合唱、楽団などで、たくさんの楽譜を管理している方</li>
+      <li>演奏会ごとに、プログラムや写真、演奏曲をまとめて残したい方</li>
       <li>楽譜とお手本の演奏動画を一緒に管理したい方</li>
     </ul>
     <p class="note">本アプリは楽譜そのものを収録・配布するものではありません。お手持ちの楽譜の管理にお使いください。</p>
@@ -179,6 +214,8 @@
       <dd>Microsoft Store（Windows 10 / 11）で配信しています。上のボタンからストアのページを開けます。</dd>
       <dt>料金はいくらですか？</dt>
       <dd>買い切り580円です。月額や年額の費用はかかりません。</dd>
+      <dt>どんなパソコンで使えますか？</dt>
+      <dd>Windows 10 / 11のパソコンで使えます。現在、Windows向けのみの提供です。</dd>
       <dt>楽譜は付いていますか？</dt>
       <dd>いいえ。お手持ちの楽譜（PDFなど）を登録して使うアプリです。</dd>
       <dt>検索はどんな仕組みですか？</dt>
