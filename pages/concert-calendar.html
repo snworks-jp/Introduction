@@ -82,6 +82,7 @@
   .hp { position:absolute; left:-9999px; width:1px; height:1px; opacity:0; }
   .send[disabled] { opacity:.6; cursor:wait; }
   .card a.lk { display:inline-block; margin-top:8px; font-size:13px; font-weight:800; color:var(--blue); }
+  .card .src { margin:4px 0 0; font-size:12px; color:var(--muted); }
   .state { text-align:center; color:var(--muted); padding:8px; font-size:14px; }
   .toast { position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(20px); background:var(--ink); color:#fff; padding:10px 18px; border-radius:999px; font-size:13px; font-weight:700; opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; z-index:50; }
   .toast.on { opacity:1; transform:translateX(-50%); }
@@ -119,7 +120,7 @@
     <aside class="side" aria-live="polite">
       <h3 id="selTitle"></h3>
       <ul class="cards" id="selCards"></ul>
-      <p class="note">※掲載内容は、投稿者の申告にもとづきます。最新の情報は、各団体の案内でご確認ください。</p>
+      <p class="note">※掲載内容は、投稿者の申告や、公開されている情報にもとづきます。最新の情報は、各団体の案内でご確認ください。<br>※一部の演奏会は、<a href="https://www.concertsquare.jp/" target="_blank" rel="noopener noreferrer">コンサートスクウェア</a>の公開RSSをもとに掲載しています。</p>
     </aside>
   </div>
 
@@ -193,8 +194,10 @@ $("#region").onchange=e=>{reg=e.target.value;render();};
 
 function card(e){
   const g=gc[e.genre]?e.genre:"その他", c=gc[g];
-  const link=/^https?:\/\//i.test(e.url||"")?`<a class="lk" href="${esc(e.url)}" target="_blank" rel="noopener noreferrer nofollow">詳細ページを見る ↗</a>`:"";
-  return `<li class="card" style="--c:${c}"><span class="g">${esc(g)}</span><strong>${esc(e.name)}</strong><dl><dt>日時</dt><dd>${+e.d.slice(5,7)}月${+e.d.slice(8)}日 ${e.t?esc(e.t)+"開演":"開演時間は未定"}</dd><dt>会場</dt><dd>${esc(e.pref)}${e.venue?"・"+esc(e.venue):""}</dd>${e.fee?`<dt>入場料</dt><dd>${esc(e.fee)}</dd>`:""}</dl>${link}</li>`;
+  const ok=/^https?:\/\//i.test(e.url||"");
+  const link=ok?`<a class="lk" href="${esc(e.url)}" target="_blank" rel="noopener noreferrer nofollow">${e.src?esc(e.src)+"で詳細を見る":"詳細ページを見る"} ↗</a>`:"";
+  const src=e.src?`<p class="src">情報元：${esc(e.src)}</p>`:"";
+  return `<li class="card" style="--c:${c}"><span class="g">${esc(g)}</span><strong>${esc(e.name)}</strong><dl><dt>日時</dt><dd>${+e.d.slice(5,7)}月${+e.d.slice(8)}日 ${e.t?esc(e.t)+"開演":"開演時間は未定"}</dd><dt>会場</dt><dd>${esc(e.pref)}${e.venue?"・"+esc(e.venue):""}</dd>${e.fee?`<dt>入場料</dt><dd>${esc(e.fee)}</dd>`:""}</dl>${link}${src}</li>`;
 }
 function render(){
   const [y,m]=ym; $("#ym").textContent=`${y}年${m+1}月`;
