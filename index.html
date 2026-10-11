@@ -7,60 +7,138 @@
 <meta name="description" content="SN Worksが開発・公開しているアプリの紹介ページ一覧です。">
 <link rel="canonical" href="https://snworks-jp.github.io/Introduction/">
 <style>
-  :root { --bg:#faf7f2; --surface:#fff; --ink:#2a2622; --muted:#6b6359; --line:#e6dfd3; --accent:#8a3b2e; }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg:#1c1917; --surface:#26221f; --ink:#f1ebe2; --muted:#a89f93; --line:#3a342f; --accent:#d9826f; }
+  :root {
+    --bg: #eef1ff;
+    --ink: #1a1a3c;
+    --muted: #4f5078;
+    --yellow: #ffd23f;
+    --coral: #ff6b57;
+    --blue: #3d5afe;
+    --mint: #2fd39a;
+    --paper: #ffffff;
+    --round: "Hiragino Maru Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
   }
   * { box-sizing: border-box; }
-  body { margin:0; background:var(--bg); color:var(--ink); line-height:1.8;
-    font-family:"Hiragino Sans","Yu Gothic","Meiryo",system-ui,sans-serif; }
-  .wrap { max-width:760px; margin:0 auto; padding:0 16px; }
-  header { padding:56px 0 24px; }
-  h1 { margin:0 0 8px; font-size:clamp(28px,6vw,40px); line-height:1.3; }
-  header p { margin:0; color:var(--muted); }
-  h2 { margin:40px 0 0; font-size:20px; }
-  ul { list-style:none; margin:24px 0 0; padding:0; display:grid; gap:14px; }
-  li a { display:block; padding:18px 20px; background:var(--surface); border:1px solid var(--line);
-    border-radius:10px; color:inherit; text-decoration:none; }
-  li a:hover { border-color:var(--accent); }
-  li a:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
-  li strong { display:block; font-size:18px; color:var(--accent); }
-  li span { color:var(--muted); font-size:15px; }
-  footer { padding:48px 0 56px; font-size:13px; color:var(--muted); text-align:center; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--round); line-height: 1.8; overflow-x: clip; }
+  a { color: inherit; }
+  a:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+  /* 上部に残るバー: スクロールしてもSN Worksだけ見えている */
+  .bar { position: sticky; top: 0; z-index: 10; background: var(--ink); border-bottom: 4px solid var(--yellow); }
+  .bar .wrap { display: flex; align-items: center; min-height: 52px; }
+  .brand { color: #fff; text-decoration: none; font-size: 20px; font-weight: 800; letter-spacing: .01em; }
+  .brand:focus-visible { outline: 3px solid var(--yellow); outline-offset: 4px; }
+
+  /* hero */
+  .hero .wrap { display: grid; grid-template-columns: 1fr; gap: 12px; padding-top: 44px; padding-bottom: 20px; align-items: center; }
+  @media (min-width: 820px) { .hero .wrap { grid-template-columns: 1.15fr .85fr; padding-top: 72px; padding-bottom: 36px; } }
+  h1 { margin: 0; font-weight: 800; font-size: clamp(48px, 12vw, 96px); line-height: 1; letter-spacing: -.01em; }
+  .catch { margin: 18px 0 0; font-size: clamp(20px, 4.6vw, 30px); font-weight: 800; line-height: 1.5; text-wrap: balance; }
+  .lede { margin: 12px 0 0; color: var(--muted); font-size: clamp(14px, 2.6vw, 16px); max-width: 30em; }
+  .art { position: relative; justify-self: center; width: min(340px, 78vw); aspect-ratio: 1; }
+  .art > svg:first-child { width: 100%; height: 100%; display: block; overflow: visible; }
+  .art .float { position: absolute; height: auto; display: block; width: 14%; animation: bob 6.5s ease-in-out infinite; }
+  .art .f1 { left: -4%; top: 6%; } .art .f2 { right: -2%; top: 0; animation-delay: -2.2s; width: 12%; } .art .f3 { right: 6%; bottom: 4%; animation-delay: -4s; width: 16%; }
+  @keyframes bob { 0%,100% { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-12px) rotate(6deg); } }
+
+  section { padding: 40px 0 4px; }
+  h2 { margin: 0 0 22px; font-size: 24px; font-weight: 800; }
+
+  /* 付箋 */
+  .notes { display: grid; gap: 22px; list-style: none; margin: 0; padding: 0; }
+  @media (min-width: 720px) { .notes.two { grid-template-columns: 1fr 1fr; } }
+  .note { display: block; position: relative; text-decoration: none; padding: 30px 24px 24px; border-radius: 6px 6px 18px 6px; box-shadow: 0 10px 0 -6px rgba(26,26,60,.12), 0 16px 26px -14px rgba(26,26,60,.35); transform: rotate(var(--tilt, 0deg)); transition: transform .28s cubic-bezier(.3,1.5,.5,1), box-shadow .28s; }
+  .note::before { content: ""; position: absolute; top: -12px; left: 50%; width: 84px; height: 24px; margin-left: -42px; background: rgba(255,255,255,.65); border: 1px solid rgba(26,26,60,.08); transform: rotate(-2deg); }
+  .note:hover { transform: rotate(0) translateY(-6px) scale(1.015); box-shadow: 0 14px 0 -8px rgba(26,26,60,.12), 0 26px 34px -16px rgba(26,26,60,.4); }
+  .note strong { display: block; font-size: 22px; line-height: 1.45; font-weight: 800; }
+  .note .d { display: block; margin-top: 8px; font-size: 14.5px; line-height: 1.8; }
+  .note .tag { display: inline-block; margin-top: 14px; padding: 4px 14px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 13px; font-weight: 700; }
+  .app { background: var(--yellow); --tilt: -.5deg; }
+  .app .d { color: #3b3410; }
+  .r1 { background: #fff; --tilt: 1deg; border-top: 8px solid var(--blue); }
+  .r2 { background: #fff; --tilt: -1deg; border-top: 8px solid var(--mint); }
+  .r1 strong, .r2 strong { font-size: 18px; }
+  .r1 .d, .r2 .d { color: var(--muted); }
+  footer { padding: 56px 0 48px; color: var(--muted); font-size: 13px; text-align: center; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .float { animation: none; }
+    .note { transition: none; }
+  }
 </style>
 </head>
 <body>
-<header>
+
+<div class="bar">
+  <div class="wrap"><a class="brand" href="./">SN Works</a></div>
+</div>
+
+<header class="hero">
   <div class="wrap">
-    <h1>SN Works</h1>
-    <p>アプリの紹介ページ一覧</p>
+    <div>
+      <h1>SN Works</h1>
+      <p class="catch">音楽を続ける人の、ちょうどいい道具を作っています。</p>
+      <p class="lede">ここは、アプリの紹介ページです。</p>
+    </div>
+    <div class="art" aria-hidden="true">
+      <svg viewBox="0 0 340 340">
+        <circle cx="178" cy="176" r="138" fill="#ffd23f"/>
+        <circle cx="262" cy="86" r="34" fill="#ff6b57"/>
+        <rect x="40" y="248" width="70" height="70" rx="18" fill="#3d5afe" transform="rotate(14 75 283)"/>
+        <!-- 重なった楽譜 -->
+        <g transform="rotate(-12 170 175)"><rect x="90" y="70" width="170" height="214" rx="10" fill="#2fd39a"/></g>
+        <g transform="rotate(6 170 175)"><rect x="92" y="62" width="170" height="214" rx="10" fill="#ffffff" stroke="#1a1a3c" stroke-width="4"/>
+          <g stroke="#1a1a3c" stroke-width="2.4" stroke-linecap="round">
+            <g id="sc"><line x1="112" y1="108" x2="244" y2="108"/><line x1="112" y1="118" x2="244" y2="118"/><line x1="112" y1="128" x2="244" y2="128"/><line x1="112" y1="138" x2="244" y2="138"/><line x1="112" y1="148" x2="244" y2="148"/></g>
+            <use href="#sc" y="64"/>
+          </g>
+          <g fill="#ff6b57" stroke="#1a1a3c" stroke-width="2.4"><ellipse cx="140" cy="143" rx="8" ry="6" transform="rotate(-18 140 143)"/><ellipse cx="190" cy="123" rx="8" ry="6" transform="rotate(-18 190 123)"/><ellipse cx="222" cy="133" rx="8" ry="6" transform="rotate(-18 222 133)"/><ellipse cx="156" cy="197" rx="8" ry="6" transform="rotate(-18 156 197)"/><ellipse cx="206" cy="207" rx="8" ry="6" transform="rotate(-18 206 207)"/></g>
+          <g stroke="#1a1a3c" stroke-width="2.6" stroke-linecap="round"><line x1="147" y1="141" x2="147" y2="108"/><line x1="197" y1="121" x2="197" y2="88"/><line x1="229" y1="131" x2="229" y2="98"/><line x1="163" y1="195" x2="163" y2="162"/><line x1="213" y1="205" x2="213" y2="172"/></g>
+        </g>
+      </svg>
+      <!-- ふわふわ浮かぶ音符 -->
+      <svg class="float f1" viewBox="0 0 40 60"><ellipse cx="14" cy="46" rx="11" ry="8" fill="#3d5afe" transform="rotate(-20 14 46)"/><rect x="22" y="6" width="4" height="40" fill="#3d5afe"/><path d="M26 6 q12 6 8 20 q-2 -10 -8 -12z" fill="#3d5afe"/></svg>
+      <svg class="float f2" viewBox="0 0 40 60"><ellipse cx="14" cy="46" rx="11" ry="8" fill="#ff6b57" transform="rotate(-20 14 46)"/><rect x="22" y="6" width="4" height="40" fill="#ff6b57"/><path d="M26 6 q12 6 8 20 q-2 -10 -8 -12z" fill="#ff6b57"/></svg>
+      <svg class="float f3" viewBox="0 0 40 60"><ellipse cx="14" cy="46" rx="11" ry="8" fill="#1a1a3c" transform="rotate(-20 14 46)"/><rect x="22" y="6" width="4" height="40" fill="#1a1a3c"/><path d="M26 6 q12 6 8 20 q-2 -10 -8 -12z" fill="#1a1a3c"/></svg>
+    </div>
   </div>
 </header>
+
 <main class="wrap">
-  <ul>
-    <li>
-      <a href="ScoreMate_Introduction.html">
-        <strong>楽譜管理アプリ ScoreMate</strong>
-        <span>演奏会・楽曲・パート・作曲家をまとめて管理できる、Windows向けの楽譜管理アプリ（Microsoft Store・買い切り580円）</span>
-      </a>
-    </li>
-  </ul>
-  <h2>読みもの</h2>
-  <ul>
-    <li>
-      <a href="blog/concert-record.html">
-        <strong>演奏会の記録を残す方法</strong>
-        <span>プログラム・写真・楽譜をまとめて整理するコツ</span>
-      </a>
-    </li>
-    <li>
-      <a href="blog/youtube-performance-record.html">
-        <strong>自分の演奏をYouTubeで残して、楽譜と一緒に管理する方法</strong>
-        <span>演奏の動画リンクと楽譜を、曲ごとにまとめるコツ</span>
-      </a>
-    </li>
-  </ul>
+  <section aria-labelledby="apps">
+    <h2 id="apps">アプリ</h2>
+    <ul class="notes">
+      <li>
+        <a class="note app" href="ScoreMate_Introduction.html">
+          <strong>楽譜管理アプリ ScoreMate</strong>
+          <span class="d">演奏会・楽曲・パート・作曲家をまとめて管理。PDFの楽譜も、YouTubeの動画も、アプリの中で開けます。</span>
+          <span class="tag">Windows向け・買い切り580円</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="reads">
+    <h2 id="reads">BLOG</h2>
+    <ul class="notes two">
+      <li>
+        <a class="note r1" href="blog/concert-record.html">
+          <strong>演奏会の記録を残す方法</strong>
+          <span class="d">プログラム・写真・楽譜をまとめて整理するコツ</span>
+        </a>
+      </li>
+      <li>
+        <a class="note r2" href="blog/youtube-performance-record.html">
+          <strong>自分の演奏をYouTubeで残して、楽譜と一緒に管理する方法</strong>
+          <span class="d">演奏の動画リンクと楽譜を、曲ごとにまとめるコツ</span>
+        </a>
+      </li>
+    </ul>
+  </section>
 </main>
+
 <footer>© 2026 SN Works</footer>
+
 </body>
 </html>
