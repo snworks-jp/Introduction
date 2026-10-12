@@ -27,6 +27,10 @@
   .chip i { width:10px; height:10px; border-radius:50%; background:var(--c); display:inline-block; }
   .chip[aria-pressed="false"] { opacity:.45; border-style:dashed; }
   select { border:2px solid var(--ink); border-radius:999px; background:#fff; padding:3px 12px; font-size:13px; font-weight:700; }
+  .refresh { border:2px solid var(--ink); background:#fff; border-radius:999px; padding:5px 14px; font-size:13px; font-weight:800; cursor:pointer; }
+  .refresh small { display:block; font-size:10px; font-weight:700; color:var(--muted); line-height:1.2; }
+  .refresh.busy span { display:inline-block; animation:spin .8s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
   .spacer { flex:1; }
   .post { border:0; background:var(--coral); color:#fff; font-weight:800; border-radius:999px; padding:9px 20px; cursor:pointer; box-shadow:0 4px 0 #c4442f; transition:transform .12s, box-shadow .12s; }
   .post:hover { transform:translateY(2px); box-shadow:0 2px 0 #c4442f; }
@@ -87,7 +91,7 @@
   .toast { position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(20px); background:var(--ink); color:#fff; padding:10px 18px; border-radius:999px; font-size:13px; font-weight:700; opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; z-index:50; }
   .toast.on { opacity:1; transform:translateX(-50%); }
   footer { padding:10px 0 40px; text-align:center; font-size:12.5px; color:var(--muted); }
-  @media (prefers-reduced-motion: reduce) { .post, .toast { transition:none; } }
+  @media (prefers-reduced-motion: reduce) { .post, .toast { transition:none; } .refresh.busy span { animation:none; } }
 </style>
 </head>
 <body>
@@ -102,6 +106,7 @@
     <div class="chips" id="chips" role="group" aria-label="ジャンルで絞り込む"></div>
     <select id="region" aria-label="地域で絞り込む"><option value="">全国</option></select>
     <span class="spacer"></span>
+    <button class="refresh" id="refresh" type="button" aria-label="最新の情報に更新"><span aria-hidden="true">↻</span> 更新<small id="updated"></small></button>
     <div class="tabs" role="tablist" aria-label="表示の切り替え">
       <button role="tab" aria-selected="true" id="tabCal">カレンダー</button>
       <button role="tab" aria-selected="false" id="tabList">一覧</button>
@@ -179,10 +184,21 @@ async function load(){
   try{
     const r=await fetch(API_URL,{cache:"no-store"}); const j=await r.json();
     EV=(j.events||[]).filter(e=>/^\d{4}-\d{2}-\d{2}$/.test(e.d)).map(e=>({...e,genre:gc[e.genre]?e.genre:"その他"}));
-    status="ok";
-  }catch(err){status="error";}
+    status="ok"; stamp();
+  }catch(err){ if(status!=="ok") status="error"; }
   render();
 }
+function stamp(){const d=new Date(); $("#updated").textContent=`${d.getHours()}:${pad(d.getMinutes())}時点`; lastLoad=Date.now();}
+let lastLoad=0;
+async function refresh(){
+  const b=$("#refresh"); if(b.classList.contains("busy"))return;
+  b.classList.add("busy");
+  if(!API_URL){await new Promise(r=>setTimeout(r,500));b.classList.remove("busy");return;}
+  const before=status; await load(); b.classList.remove("busy");
+  toast(status==="ok"?"最新の情報に更新しました。":"更新できませんでした。電波の良いところで、もう一度お試しください。");
+}
+$("#refresh").onclick=refresh;
+document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible" && API_URL && Date.now()-lastLoad>5*60*1000) load(); });
 const visible=()=>EV.filter(e=>on.has(e.genre)&&(!reg||prefRegion[e.pref]===reg));
 
 $("#chips").innerHTML=GENRES.map(([g,c])=>`<button class="chip" style="--c:${c}" aria-pressed="true" data-g="${g}"><i></i>${g}</button>`).join("");
