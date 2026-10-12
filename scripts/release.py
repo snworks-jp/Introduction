@@ -130,7 +130,7 @@ INDEX_TMPL = """<!doctype html>
   <p class="lede">金管楽器の上達に役立つコラムなどを、載せています。</p>
 __SECTIONS__
 </main>
-<footer><div class="wrap"><a href="../">SN Works トップへ</a><br>© 2026 SN Works</div></footer>
+<footer><div class="wrap"><a href="../">SN Works トップへ</a><br><a href="../pages/privacy.html">プライバシーポリシー</a><br>© 2026 SN Works</div></footer>
 </body>
 </html>
 """
@@ -161,7 +161,7 @@ def build_top(posts):
 
 def build_sitemap(posts):
     urls = [(BASE, today().isoformat()), (BASE + "blog/", posts[0]["date"] if posts else today().isoformat())]
-    for rel in ["pages/ScoreMate_Introduction.html", "pages/concert-calendar.html"]:
+    for rel in ["pages/ScoreMate_Introduction.html", "pages/concert-calendar.html", "pages/privacy.html"]:
         if (ROOT / rel).exists():
             urls.append((BASE + rel, today().isoformat()))
     urls += [(BASE + "blog/" + p["file"], p["date"]) for p in posts]
