@@ -27,7 +27,10 @@
   .note:hover { transform:rotate(0) translateY(-6px) scale(1.015); }
   .note strong { display:block; font-size:18px; line-height:1.5; font-weight:800; }
   .note .d { display:block; margin-top:8px; font-size:14.5px; color:var(--muted); }
+  .note .date { display:block; margin-top:6px; font-size:12.5px; color:var(--muted); opacity:.75; }
   .r1 { --tilt:1deg; border-top:8px solid var(--blue); } .r2 { --tilt:-1deg; border-top:8px solid var(--mint); }
+  .sec { margin:44px 0 16px; font-size:20px; font-weight:800; }
+  .sec:first-of-type { margin-top:8px; }
   footer { padding:48px 0; color:var(--muted); font-size:13px; text-align:center; }
   @media (prefers-reduced-motion:reduce) { .note { transition:none; } }
 </style>
@@ -37,35 +40,44 @@
 <main class="wrap">
   <h1>BLOG</h1>
   <p class="lede">金管楽器の上達に役立つコラムなどを、載せています。</p>
+  <h2 class="sec">コラム</h2>
   <ul class="notes">
       <li>
         <a class="note r1" href="long-tone.html">
           <strong>ロングトーンは何のための練習？</strong>
           <span class="d">ロングトーンの目的を、3つの記事から整理</span>
+          <span class="date">2026年10月12日</span>
         </a>
       </li>
       <li>
         <a class="note r2" href="lip-slur.html">
           <strong>リップスラーが苦手なときの考え方</strong>
           <span class="d">苦手意識の原因と、練習のヒント</span>
+          <span class="date">2026年10月12日</span>
         </a>
       </li>
       <li>
         <a class="note r1" href="high-notes.html">
           <strong>高い音を、力まずに出すには</strong>
           <span class="d">高い音が出ない時の、力みの見直し</span>
+          <span class="date">2026年10月12日</span>
         </a>
       </li>
+  </ul>
+  <h2 class="sec">お知らせ</h2>
+  <ul class="notes">
       <li>
-        <a class="note r2" href="youtube-performance-record.html">
+        <a class="note r1" href="youtube-performance-record.html">
           <strong>自分の演奏をYouTubeで残して、楽譜と一緒に管理する方法</strong>
           <span class="d">演奏の動画リンクと楽譜を、曲ごとにまとめるコツ</span>
+          <span class="date">2026年10月11日</span>
         </a>
       </li>
       <li>
-        <a class="note r1" href="concert-record.html">
+        <a class="note r2" href="concert-record.html">
           <strong>演奏会の記録を残す方法</strong>
           <span class="d">プログラム・写真・楽譜をまとめて整理するコツ</span>
+          <span class="date">2026年10月11日</span>
         </a>
       </li>
   </ul>

@@ -54,6 +54,10 @@ def meta(text, name):
     m = re.search(rf'<meta name="{name}" content="([^"]*)"', text)
     return html.unescape(m.group(1)) if m else ""
 
+def fmt_date_ja(date):
+    y, m, d = date.split("-")
+    return f"{int(y)}年{int(m)}月{int(d)}日"
+
 def read_posts():
     posts = []
     for p in (ROOT / "blog").glob("*.html"):
@@ -68,7 +72,9 @@ def read_posts():
         else:
             title, summary = title_full, ""
         summary = meta(t, "card-summary") or summary or meta(t, "description")[:44]
-        posts.append(dict(file=p.name, title=title.strip(), summary=summary.strip(), date=date))
+        # category: "announcement"（お知らせ）以外はすべて「コラム」として扱う
+        category = meta(t, "category") or "column"
+        posts.append(dict(file=p.name, title=title.strip(), summary=summary.strip(), date=date, category=category))
     posts.sort(key=lambda x: (x["date"], x["file"]), reverse=True)
     return posts
 
@@ -77,6 +83,7 @@ def card(p, i, prefix):
     return (f'      <li>\n        <a class="note {cls}" href="{prefix}{p["file"]}">\n'
             f'          <strong>{html.escape(p["title"])}</strong>\n'
             + (f'          <span class="d">{html.escape(p["summary"])}</span>\n' if p["summary"] else "")
+            + f'          <span class="date">{fmt_date_ja(p["date"])}</span>\n'
             + '        </a>\n      </li>')
 
 INDEX_TMPL = """<!doctype html>
@@ -108,7 +115,10 @@ INDEX_TMPL = """<!doctype html>
   .note:hover { transform:rotate(0) translateY(-6px) scale(1.015); }
   .note strong { display:block; font-size:18px; line-height:1.5; font-weight:800; }
   .note .d { display:block; margin-top:8px; font-size:14.5px; color:var(--muted); }
+  .note .date { display:block; margin-top:6px; font-size:12.5px; color:var(--muted); opacity:.75; }
   .r1 { --tilt:1deg; border-top:8px solid var(--blue); } .r2 { --tilt:-1deg; border-top:8px solid var(--mint); }
+  .sec { margin:44px 0 16px; font-size:20px; font-weight:800; }
+  .sec:first-of-type { margin-top:8px; }
   footer { padding:48px 0; color:var(--muted); font-size:13px; text-align:center; }
   @media (prefers-reduced-motion:reduce) { .note { transition:none; } }
 </style>
@@ -118,18 +128,25 @@ INDEX_TMPL = """<!doctype html>
 <main class="wrap">
   <h1>BLOG</h1>
   <p class="lede">金管楽器の上達に役立つコラムなどを、載せています。</p>
-  <ul class="notes">
-__CARDS__
-  </ul>
+__SECTIONS__
 </main>
 <footer><div class="wrap"><a href="../">SN Works トップへ</a><br>© 2026 SN Works</div></footer>
 </body>
 </html>
 """
 
+SECTION_TITLES = {"column": "コラム", "announcement": "お知らせ"}
+
 def build_blog_index(posts):
-    cards = "\n".join(card(p, i, "") for i, p in enumerate(posts))
-    out = INDEX_TMPL.replace("__BASE__", BASE).replace("__CARDS__", cards)
+    sections = []
+    for key in ("column", "announcement"):
+        group = [p for p in posts if p["category"] == key]
+        if not group:
+            continue
+        cards = "\n".join(card(p, i, "") for i, p in enumerate(group))
+        sections.append(f'  <h2 class="sec">{SECTION_TITLES[key]}</h2>\n'
+                         f'  <ul class="notes">\n{cards}\n  </ul>')
+    out = INDEX_TMPL.replace("__BASE__", BASE).replace("__SECTIONS__", "\n".join(sections))
     (ROOT / "blog" / "index.html").write_text(out, encoding="utf-8")
 
 def build_top(posts):
