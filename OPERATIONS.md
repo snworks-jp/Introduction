@@ -60,8 +60,23 @@ python3 scripts/release.py --date 2026-10-19   # 日付指定
 `scripts/template-curation.html` と `scripts/release.py`（`INDEX_TMPL` の blog/index.html 生成部分）
 には既に反映済みなので、通常の記事公開フローでは追加作業不要。
 
-「3. アクセス解析」の節は、現在「現在は行っていません」としている。GA4導入時（依頼書005）に、
-計測内容を説明する文面に差し替えること。
+「3. アクセス解析」の節には、GA4導入後の文面（計測内容の説明）を記載済み。
+
+## GA4（アクセス解析）導入（2026-10-12 追加・依頼書005）
+サイトの訪問状況を Google アナリティクス4（GA4）で計測している。
+- 測定ID: `G-BRLV8TNDOG`（アカウント「SN Works」／プロパティ「SN Works Introduction」）
+- タグ（gtag.js）は、全ページの `<head>` 直後に入っている:
+  `index.html` `pages/ScoreMate_Introduction.html` `pages/concert-calendar.html` `pages/privacy.html`、
+  BLOG記事5本、`blog/index.html`（`scripts/release.py` の `INDEX_TMPL` に反映済み）。
+  `googleb39988c901ff592a.html`（Search Console確認用）は対象外。
+  新しい記事の雛形 `scripts/template-curation.html` にも反映済みなので、通常の記事公開フローでは
+  追加作業不要。
+- GA4側の設定: データ保持期間は最長の14か月、Googleシグナルはオフ（広告を始めるまでオフのまま）。
+- `pages/privacy.html` の「3. アクセス解析」に計測内容を説明する文面を記載済み。
+- 拡張計測機能の「アウトバウンドクリック」はGA4の既定で有効（Store等への外部リンクのクリックを追える）。
+- 導入後のリアルタイム確認（計測できているか）は、運営者がリポジトリに反映した後に行う。
+- GA4の画面には、運営者（nikaido1978@gmail.com）が管理者権限で直接ログインして確認できる
+  （プロパティ作成時のアカウントのため）。
 
 ## 営業用エージェントの依頼書を受け取ったとき
 1. `_requests/` にある依頼書を確認する（対象・提案内容・理由・優先度）。
