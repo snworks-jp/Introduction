@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLOG｜SN Works</title>
+<meta name="description" content="SN WorksのBLOG。金管楽器の上達に役立つコラムや、演奏の記録の残し方などを載せています。">
+<link rel="canonical" href="https://snworks-jp.github.io/Introduction/blog/">
+<style>
+  :root { --bg:#eef1ff; --ink:#1a1a3c; --muted:#4f5078; --yellow:#ffd23f; --blue:#3d5afe; --mint:#2fd39a;
+    --round:"Hiragino Maru Gothic ProN","Yu Gothic","Meiryo",system-ui,sans-serif; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--round); line-height:1.8; overflow-x:clip; }
+  a { color:inherit; } a:focus-visible { outline:3px solid var(--blue); outline-offset:4px; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 20px; }
+  .bar { position:sticky; top:0; z-index:10; background:var(--ink); border-bottom:4px solid var(--yellow); }
+  .bar .wrap { display:flex; align-items:center; min-height:52px; }
+  .brand { color:#fff; text-decoration:none; font-size:20px; font-weight:800; }
+  h1 { margin:40px 0 6px; font-size:clamp(32px,8vw,52px); font-weight:800; line-height:1.1; }
+  .lede { margin:0 0 32px; color:var(--muted); }
+  .notes { display:grid; gap:22px; list-style:none; margin:0; padding:0 0 8px; }
+  @media (min-width:720px) { .notes { grid-template-columns:1fr 1fr; } }
+  .note { display:block; position:relative; text-decoration:none; padding:30px 24px 24px; border-radius:6px 6px 18px 6px; background:#fff;
+    box-shadow:0 10px 0 -6px rgba(26,26,60,.12), 0 16px 26px -14px rgba(26,26,60,.35); transform:rotate(var(--tilt,0deg));
+    transition:transform .28s cubic-bezier(.3,1.5,.5,1), box-shadow .28s; }
+  .note::before { content:""; position:absolute; top:-12px; left:50%; width:84px; height:24px; margin-left:-42px; background:rgba(255,255,255,.65); border:1px solid rgba(26,26,60,.08); transform:rotate(-2deg); }
+  .note:hover { transform:rotate(0) translateY(-6px) scale(1.015); }
+  .note strong { display:block; font-size:18px; line-height:1.5; font-weight:800; }
+  .note .d { display:block; margin-top:8px; font-size:14.5px; color:var(--muted); }
+  .r1 { --tilt:1deg; border-top:8px solid var(--blue); } .r2 { --tilt:-1deg; border-top:8px solid var(--mint); }
+  footer { padding:48px 0; color:var(--muted); font-size:13px; text-align:center; }
+  @media (prefers-reduced-motion:reduce) { .note { transition:none; } }
+</style>
+</head>
+<body>
+<div class="bar"><div class="wrap"><a class="brand" href="../">SN Works</a></div></div>
+<main class="wrap">
+  <h1>BLOG</h1>
+  <p class="lede">金管楽器の上達に役立つコラムなどを、載せています。</p>
+  <ul class="notes">
+      <li>
+        <a class="note r1" href="youtube-performance-record.html">
+          <strong>自分の演奏をYouTubeで残して、楽譜と一緒に管理する方法</strong>
+          <span class="d">演奏の動画リンクと楽譜を、曲ごとにまとめるコツ</span>
+        </a>
+      </li>
+      <li>
+        <a class="note r2" href="concert-record.html">
+          <strong>演奏会の記録を残す方法</strong>
+          <span class="d">プログラム・写真・楽譜をまとめて整理するコツ</span>
+        </a>
+      </li>
+  </ul>
+</main>
+<footer><div class="wrap"><a href="../">SN Works トップへ</a><br>© 2026 SN Works</div></footer>
+</body>
+</html>
