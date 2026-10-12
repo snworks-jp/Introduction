@@ -90,13 +90,13 @@ INDEX_TMPL = """<!doctype html>
 <html lang="ja">
 <head>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BRLV8TNDOG"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BRLV8TND0G"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-BRLV8TNDOG');
+  gtag('config', 'G-BRLV8TND0G');
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
