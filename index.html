@@ -13,6 +13,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SN Works - アプリ紹介</title>
+<link rel="icon" href="/Introduction/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/Introduction/favicon-32.png">
+<link rel="apple-touch-icon" href="/Introduction/apple-touch-icon.png">
 <meta name="description" content="SN Worksが開発・公開しているアプリの紹介と、全国の演奏会カレンダーです。">
 <link rel="canonical" href="https://snworks-jp.github.io/Introduction/">
 <style>
@@ -44,11 +47,16 @@
   .nav a:hover { color: var(--gold); }
 
   /* hero */
-  .hero .wrap { padding: 92px 24px 76px; }
-  .eyebrow { font-family: var(--eng); font-size: 12px; letter-spacing: .4em; color: var(--gold); margin: 0 0 22px; }
-  h1.catch { font-family: var(--serif); font-weight: 500; font-size: clamp(26px, 5vw, 44px); line-height: 1.65; margin: 0; color: var(--ink); text-wrap: balance; }
-  .goldline { display: block; width: 56px; height: 1px; background: var(--gold); margin: 30px 0; border: 0; }
-  .lede { font-size: 15px; color: var(--desc); max-width: 30em; margin: 0; }
+  .hero { position: relative; overflow: hidden; }
+  .hero .staff { position: absolute; left: 0; right: 0; top: 50%; height: 113px; margin-top: -56px;
+    background: repeating-linear-gradient(to bottom, var(--frame-line) 0, var(--frame-line) 1px, transparent 1px, transparent 28px);
+    pointer-events: none; z-index: 0; }
+  .hero .wrap { position: relative; z-index: 1; padding: 92px 24px 76px; }
+  .eyebrow { font-family: var(--eng); font-size: 12px; letter-spacing: .4em; color: var(--gold); margin: 0 0 26px; }
+  h1.catch-en { font-family: var(--eng); font-style: italic; font-weight: 300; font-size: clamp(80px, 14vw, 200px); line-height: .95; margin: 0; color: var(--ink); }
+  h1.catch-en .dot { display: inline-block; width: .1em; height: .1em; margin-left: .08em; border-radius: 50%; background: var(--gold); vertical-align: .08em; }
+  .catch-ja { font-family: var(--serif); font-size: clamp(15px, 2.4vw, 19px); letter-spacing: .2em; color: var(--desc); margin: 20px 0 0; }
+  .lede { font-size: 15px; color: var(--desc); max-width: 30em; margin: 30px 0 0; }
 
   section { padding: 72px 0; border-top: 1px solid var(--line); }
   .num { font-family: var(--eng); font-size: 12px; letter-spacing: .3em; color: var(--gold); margin: 0 0 16px; }
@@ -105,10 +113,11 @@
 </div>
 
 <header class="hero">
+  <div class="staff" aria-hidden="true"></div>
   <div class="wrap">
-    <p class="eyebrow">TOOLS FOR MUSICIANS</p>
-    <h1 class="catch">音楽と長く付き合う人のための、<br>静かな道具。</h1>
-    <span class="goldline" aria-hidden="true"></span>
+    <p class="eyebrow">SN WORKS</p>
+    <h1 class="catch-en">Play on<span class="dot" aria-hidden="true"></span></h1>
+    <p class="catch-ja">音楽を続ける人のために。</p>
     <p class="lede">アプリの紹介と、演奏会カレンダーと、ちょっとしたBLOG</p>
   </div>
 </header>
