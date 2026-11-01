@@ -58,6 +58,10 @@ def fmt_date_ja(date):
     y, m, d = date.split("-")
     return f"{int(y)}年{int(m)}月{int(d)}日"
 
+def fmt_date_dot(date):
+    y, m, d = date.split("-")
+    return f"{int(y)}.{int(m):02d}.{int(d):02d}"
+
 def read_posts():
     posts = []
     for p in (ROOT / "blog").glob("*.html"):
@@ -78,12 +82,13 @@ def read_posts():
     posts.sort(key=lambda x: (x["date"], x["file"]), reverse=True)
     return posts
 
-def card(p, i, prefix):
+def card(p, i, prefix, date_fmt="ja"):
     cls = "r1" if i % 2 == 0 else "r2"
+    date_str = fmt_date_dot(p["date"]) if date_fmt == "dot" else fmt_date_ja(p["date"])
     return (f'      <li>\n        <a class="note {cls}" href="{prefix}{p["file"]}">\n'
             f'          <strong>{html.escape(p["title"])}</strong>\n'
             + (f'          <span class="d">{html.escape(p["summary"])}</span>\n' if p["summary"] else "")
-            + f'          <span class="date">{fmt_date_ja(p["date"])}</span>\n'
+            + f'          <span class="date">{date_str}</span>\n'
             + '        </a>\n      </li>')
 
 INDEX_TMPL = """<!doctype html>
@@ -107,57 +112,69 @@ INDEX_TMPL = """<!doctype html>
 <meta name="description" content="SN WorksのBLOG。金管楽器の上達に役立つコラムや、演奏の記録の残し方などを載せています。">
 <link rel="canonical" href="__BASE__blog/">
 <style>
-  :root { --bg:#eef1ff; --ink:#1a1a3c; --muted:#4f5078; --yellow:#ffd23f; --blue:#3d5afe; --mint:#2fd39a;
-    --round:"Hiragino Maru Gothic ProN","Yu Gothic","Meiryo",system-ui,sans-serif; }
+  :root { --bg:#141311; --ink:#ece6da; --muted:#a39b8c; --desc:#cfc7b8; --line:#2c2a25; --gold:#c9a96a; --gold-hover:#d8bd83;
+    --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    --sans:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
+    --eng:"Cormorant Garamond","Times New Roman",serif; }
   * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--round); line-height:1.8; overflow-x:clip; }
-  a { color:inherit; } a:focus-visible { outline:3px solid var(--blue); outline-offset:4px; }
-  .wrap { max-width:1040px; margin:0 auto; padding:0 20px; }
-  .bar { position:sticky; top:0; z-index:10; background:var(--ink); border-bottom:4px solid var(--yellow); }
-  .bar .wrap { display:flex; align-items:center; min-height:52px; }
-  .brand { color:#fff; text-decoration:none; font-size:20px; font-weight:800; }
-  h1 { margin:40px 0 6px; font-size:clamp(32px,8vw,52px); font-weight:800; line-height:1.1; }
-  .lede { margin:0 0 32px; color:var(--muted); }
-  .notes { display:grid; gap:22px; list-style:none; margin:0; padding:0 0 8px; }
-  @media (min-width:720px) { .notes { grid-template-columns:1fr 1fr; } }
-  .note { display:block; position:relative; text-decoration:none; padding:30px 24px 24px; border-radius:6px 6px 18px 6px; background:#fff;
-    box-shadow:0 10px 0 -6px rgba(26,26,60,.12), 0 16px 26px -14px rgba(26,26,60,.35); transform:rotate(var(--tilt,0deg));
-    transition:transform .28s cubic-bezier(.3,1.5,.5,1), box-shadow .28s; }
-  .note::before { content:""; position:absolute; top:-12px; left:50%; width:84px; height:24px; margin-left:-42px; background:rgba(255,255,255,.65); border:1px solid rgba(26,26,60,.08); transform:rotate(-2deg); }
-  .note:hover { transform:rotate(0) translateY(-6px) scale(1.015); }
-  .note strong { display:block; font-size:18px; line-height:1.5; font-weight:800; }
-  .note .d { display:block; margin-top:8px; font-size:14.5px; color:var(--muted); }
-  .note .date { display:block; margin-top:6px; font-size:12.5px; color:var(--muted); opacity:.75; }
-  .r1 { --tilt:1deg; border-top:8px solid var(--blue); } .r2 { --tilt:-1deg; border-top:8px solid var(--mint); }
-  .sec { margin:44px 0 16px; font-size:20px; font-weight:800; }
-  .sec:first-of-type { margin-top:8px; }
-  footer { padding:48px 0; color:var(--muted); font-size:13px; text-align:center; }
-  @media (prefers-reduced-motion:reduce) { .note { transition:none; } }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-weight:300; line-height:1.9; overflow-x:clip; }
+  a { color:inherit; text-decoration:none; } a:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 24px; }
+  .bar { border-bottom:1px solid var(--line); }
+  .bar .wrap { display:flex; align-items:center; min-height:64px; }
+  .brand { font-family:var(--eng); font-size:18px; letter-spacing:.3em; color:var(--ink); }
+  h1 { font-family:var(--serif); font-weight:500; font-size:clamp(32px,6vw,52px); line-height:1.2; margin:56px 0 10px; color:var(--ink); }
+  .lede { margin:0 0 48px; color:var(--desc); font-size:15px; }
+  .sec-block { padding:48px 0; border-top:1px solid var(--line); }
+  .sec-block:first-of-type { border-top:none; padding-top:0; }
+  .num { font-family:var(--eng); font-size:12px; letter-spacing:.3em; color:var(--gold); margin:0 0 16px; }
+  h2.sec { font-family:var(--serif); font-weight:500; font-size:20px; margin:0 0 24px; color:var(--ink); }
+  .blog-list { list-style:none; margin:0; padding:0; border-top:1px solid var(--line); }
+  .blog-list li { border-bottom:1px solid var(--line); }
+  .blog-list .note { display:flex; align-items:baseline; flex-wrap:wrap; gap:20px; padding:20px 2px; }
+  .blog-list .date { order:-2; flex:0 0 96px; font-family:var(--eng); font-size:13px; letter-spacing:.04em; color:var(--muted); }
+  .blog-list strong { order:-1; flex:0 0 auto; font-family:var(--serif); font-weight:500; font-size:16px; color:var(--ink); transition:color .2s; }
+  .blog-list .d { order:0; flex:1 1 220px; font-size:13.5px; color:var(--desc); }
+  .blog-list .note::after { content:"→"; order:1; margin-left:auto; color:var(--gold); transition:color .2s; }
+  .blog-list .note:hover strong { color:var(--gold); }
+  .blog-list .note:hover::after { color:var(--gold-hover); }
+  @media (max-width:640px) {
+    .blog-list .note { flex-direction:column; align-items:flex-start; gap:6px; }
+    .blog-list .date, .blog-list .d { flex:0 1 auto; }
+    .blog-list .note::after { display:none; }
+  }
+  footer { border-top:1px solid var(--line); padding:40px 0; margin-top:16px; }
+  footer .wrap { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:12px; color:var(--muted); }
+  footer a { color:var(--muted); } footer a:hover { color:var(--gold); }
+  @media (prefers-reduced-motion:reduce) { .blog-list .note, .blog-list strong, .blog-list .note::after { transition:none; } }
 </style>
 </head>
 <body>
-<div class="bar"><div class="wrap"><a class="brand" href="../">SN Works</a></div></div>
+<div class="bar"><div class="wrap"><a class="brand" href="../">SN WORKS</a></div></div>
 <main class="wrap">
   <h1>BLOG</h1>
   <p class="lede">金管楽器の上達に役立つコラムなどを、載せています。</p>
 __SECTIONS__
 </main>
-<footer><div class="wrap"><a href="../">SN Works トップへ</a><br><a href="../pages/privacy.html">プライバシーポリシー</a><br>© 2026 SN Works</div></footer>
+<footer><div class="wrap"><span>SN WORKS</span><a href="../pages/privacy.html">プライバシーポリシー</a><span>© 2026 SN Works</span></div></footer>
 </body>
 </html>
 """
 
 SECTION_TITLES = {"column": "コラム", "announcement": "お知らせ"}
+SECTION_LABELS = {"column": "COLUMN", "announcement": "NEWS"}
 
 def build_blog_index(posts):
     sections = []
-    for key in ("column", "announcement"):
+    groups = [key for key in ("column", "announcement") if any(p["category"] == key for p in posts)]
+    for idx, key in enumerate(groups, start=1):
         group = [p for p in posts if p["category"] == key]
-        if not group:
-            continue
-        cards = "\n".join(card(p, i, "") for i, p in enumerate(group))
-        sections.append(f'  <h2 class="sec">{SECTION_TITLES[key]}</h2>\n'
-                         f'  <ul class="notes">\n{cards}\n  </ul>')
+        cards = "\n".join(card(p, i, "", date_fmt="dot") for i, p in enumerate(group))
+        sections.append(f'  <div class="sec-block">\n'
+                         f'    <p class="num">{idx:02d} — {SECTION_LABELS[key]}</p>\n'
+                         f'    <h2 class="sec">{SECTION_TITLES[key]}</h2>\n'
+                         f'    <ul class="blog-list">\n{cards}\n    </ul>\n'
+                         f'  </div>')
     out = INDEX_TMPL.replace("__BASE__", BASE).replace("__SECTIONS__", "\n".join(sections))
     (ROOT / "blog" / "index.html").write_text(out, encoding="utf-8")
 

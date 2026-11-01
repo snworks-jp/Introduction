@@ -42,94 +42,96 @@
 </script>
 <style>
   :root {
-    --bg: #faf7f2;
-    --surface: #ffffff;
-    --ink: #2a2622;
-    --muted: #6b6359;
-    --line: #e6dfd3;
-    --accent: #8a3b2e;
-    --accent-ink: #ffffff;
-    --soft: #f1e9dc;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1c1917;
-      --surface: #26221f;
-      --ink: #f1ebe2;
-      --muted: #a89f93;
-      --line: #3a342f;
-      --accent: #d9826f;
-      --accent-ink: #1c1917;
-      --soft: #2f2a26;
-    }
+    --bg: #141311;
+    --surface: #1b1a17;
+    --ink: #ece6da;
+    --muted: #a39b8c;
+    --line: #2c2a25;
+    --frame: #3a372f;
+    --accent: #c9a96a;
+    --accent-hover: #d8bd83;
+    --accent-ink: #141311;
+    --soft: #1b1a17;
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
+  a { color: inherit; text-decoration: none; }
   body {
     margin: 0;
     background: var(--bg);
     color: var(--ink);
-    font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", system-ui, sans-serif;
+    font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", "Noto Sans JP", system-ui, sans-serif;
     line-height: 1.8;
   }
   .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
-  header { padding: 56px 0 40px; border-bottom: 1px solid var(--line); }
-  .eyebrow { margin: 0 0 12px; font-size: 14px; color: var(--muted); letter-spacing: .06em; }
+  .bar { border-bottom: 1px solid var(--line); }
+  .bar .wrap { display: flex; align-items: center; min-height: 56px; }
+  .brand { font-family: "Cormorant Garamond", "Times New Roman", serif; font-size: 17px; letter-spacing: .3em; color: var(--ink); }
+  header { padding: 40px 0 40px; border-bottom: 1px solid var(--line); }
+  .eyebrow { margin: 0 0 12px; font-size: 13px; color: var(--muted); letter-spacing: .08em; }
   .eyebrow a { color: inherit; }
-  h1 { margin: 0 0 16px; font-size: clamp(30px, 6vw, 44px); line-height: 1.25; letter-spacing: .01em; }
-  h1 .tag { display: block; margin-top: 8px; font-size: clamp(22px, 5vw, 32px); line-height: 1.4; text-wrap: balance; }
-  .lead { margin: 0 0 28px; font-size: 18px; color: var(--ink); }
+  h1, h2, h3 { font-family: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif; letter-spacing: .04em; font-weight: 500; }
+  h1 { margin: 0 0 16px; font-size: clamp(30px, 6vw, 44px); line-height: 1.3; }
+  h1 .tag { display: block; margin-top: 8px; font-size: clamp(20px, 4.6vw, 28px); line-height: 1.5; text-wrap: balance; }
+  .lead { margin: 0 0 28px; font-size: 16px; color: var(--muted); }
   .cta {
     display: inline-block;
-    padding: 14px 28px;
-    background: var(--accent);
-    color: var(--accent-ink);
-    border-radius: 8px;
-    font-weight: 700;
+    padding: 0;
+    background: none;
+    color: var(--ink);
+    border-radius: 0;
+    border-bottom: 1px solid var(--accent);
+    font-weight: 400;
     text-decoration: none;
   }
-  .cta:hover { opacity: .9; }
-  .cta:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .cta:hover { color: var(--accent); }
+  .cta:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   .meta { margin: 14px 0 0; font-size: 14px; color: var(--muted); }
   section { padding: 44px 0 8px; }
-  h2 { margin: 0 0 20px; font-size: 24px; line-height: 1.4; }
+  h2 { margin: 0 0 20px; font-size: 22px; line-height: 1.4; }
   .cards { display: grid; gap: 14px; grid-template-columns: 1fr; padding: 0; margin: 0; list-style: none; }
   @media (min-width: 640px) { .cards { grid-template-columns: 1fr 1fr; } }
   .cards li {
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 18px 20px;
   }
-  .cards h3 { margin: 0 0 6px; font-size: 17px; }
+  .cards h3 { margin: 0 0 6px; font-size: 16px; }
   .cards p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
   ul.plain { margin: 0; padding-left: 1.2em; }
   ul.plain li { margin: 6px 0; }
   .shots { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; -webkit-overflow-scrolling: touch; }
   .shots figure { flex: 0 0 68%; margin: 0; scroll-snap-align: start; }
   @media (min-width: 640px) { .shots { overflow: visible; } .shots figure { flex: 1 1 0; } }
-  .shots img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--soft); }
+  .shots img { display: block; width: 100%; height: auto; border: 1px solid var(--frame); border-radius: 12px; background: var(--soft); }
   .shots figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); line-height: 1.6; }
   .steps { margin: 0; padding: 0; list-style: none; counter-reset: s; display: grid; gap: 12px; }
-  .steps li { counter-increment: s; position: relative; padding: 16px 20px 16px 60px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; color: var(--muted); font-size: 15px; line-height: 1.7; }
+  .steps li { counter-increment: s; position: relative; padding: 16px 20px 16px 60px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; color: var(--muted); font-size: 15px; line-height: 1.7; }
   .steps li::before { content: counter(s); position: absolute; left: 18px; top: 14px; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-weight: 700; text-align: center; line-height: 28px; }
-  .steps strong { display: block; color: var(--ink); font-size: 17px; }
+  .steps strong { display: block; color: var(--ink); font-size: 17px; font-family: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif; font-weight: 500; }
   .note {
     margin-top: 24px;
     padding: 14px 18px;
     background: var(--soft);
-    border-radius: 8px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
     font-size: 14px;
     color: var(--muted);
   }
   dl { margin: 0; }
-  dt { font-weight: 700; margin-top: 18px; }
+  dt { font-weight: 700; margin-top: 18px; color: var(--ink); }
   dd { margin: 4px 0 0; color: var(--muted); font-size: 15px; }
   .bottom { text-align: center; padding: 48px 0 24px; }
   footer { padding: 28px 0 56px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); text-align: center; }
+  footer a:hover { color: var(--accent); }
 </style>
 </head>
 <body>
+
+<div class="bar">
+  <div class="wrap"><a class="brand" href="../">SN WORKS</a></div>
+</div>
 
 <header>
   <div class="wrap">
