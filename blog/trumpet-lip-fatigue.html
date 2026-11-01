@@ -19,6 +19,8 @@
 <meta name="description" content="トランペットで唇がすぐバテる悩みについて、力みの見直しや休み方のヒントを、noteの3つの記事から紹介します。">
 <meta name="card-summary" content="唇がバテる悩みを、3つの記事から整理">
 <meta name="category" content="column">
+<meta name="topic" content="lip-fatigue">
+<meta name="instrument" content="trumpet">
 <meta property="og:type" content="article">
 <meta property="og:title" content="トランペットで唇がバテるとき｜10月はトランペット月間。力みと休み方の見直し">
 <meta property="og:description" content="トランペットで唇がすぐバテる悩みについて、力みの見直しや休み方のヒントを、noteの3つの記事から紹介します。">
@@ -79,6 +81,21 @@
   footer .wrap { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
   footer a { color:var(--muted); text-decoration:none; }
   footer a:hover { color:var(--accent); }
+  .related { margin-top:8px; }
+  .related .blog-list { list-style:none; margin:0; padding:0; border-top:1px solid var(--line); }
+  .related .blog-list li { border-bottom:1px solid var(--line); }
+  .related .blog-list .note { display:flex; align-items:baseline; flex-wrap:wrap; gap:16px; padding:16px 2px; text-decoration:none; }
+  .related .blog-list .date { order:-2; flex:0 0 auto; font-size:12.5px; color:var(--muted); }
+  .related .blog-list strong { order:-1; flex:0 0 auto; font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif; font-weight:500; font-size:15px; color:var(--ink); transition:color .2s; }
+  .related .blog-list .d { order:0; flex:1 1 200px; font-size:13px; color:var(--muted); }
+  .related .blog-list .note::after { content:"→"; order:1; margin-left:auto; color:var(--accent); transition:color .2s; }
+  .related .blog-list .note:hover strong { color:var(--accent); }
+  .related .blog-list .note:hover::after { color:var(--accent); }
+  @media (max-width:640px) {
+    .related .blog-list .note { flex-direction:column; align-items:flex-start; gap:4px; }
+    .related .blog-list .date, .related .blog-list .d { flex:0 1 auto; }
+    .related .blog-list .note::after { display:none; }
+  }
 </style>
 </head>
 <div class="bar">
@@ -143,6 +160,35 @@
   <p class="more"><a class="cta" href="../pages/concert-calendar.html">演奏会カレンダーを見る</a></p>
 
   <p class="note" style="margin-top:32px">この記事は、AI（Claude）の助けを借りて下書きを作り、運営者が内容を確認して公開しています。紹介した記事の内容は、それぞれの筆者のものです。リンクは公開時点の情報です。</p>
+
+  <!-- RELATED:START -->
+  <div class="related">
+    <h2>関連する記事</h2>
+    <ul class="blog-list">
+      <li>
+        <a class="note r1" href="practice-menu.html">
+          <strong>短い時間でできる、練習メニューの組み立て</strong>
+          <span class="d">ウォームアップと基礎練習の組み立て方</span>
+          <span class="date">2026.10.31</span>
+        </a>
+      </li>
+      <li>
+        <a class="note r2" href="tonguing.html">
+          <strong>タンギングの出だしが汚い・重いとき</strong>
+          <span class="d">音の出だしを、息中心に整える考え方</span>
+          <span class="date">2026.10.25</span>
+        </a>
+      </li>
+      <li>
+        <a class="note r1" href="long-tone.html">
+          <strong>ロングトーンは何のための練習？</strong>
+          <span class="d">ロングトーンの目的を、3つの記事から整理</span>
+          <span class="date">2026.10.12</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- RELATED:END -->
 
 </main>
 

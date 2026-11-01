@@ -19,6 +19,8 @@
 <meta name="description" content="＠＠DESCRIPTION＠＠">
 <meta name="card-summary" content="＠＠CARD_SUMMARY＠＠">
 <meta name="category" content="column">
+<meta name="topic" content="＠＠TOPIC＠＠">
+<meta name="instrument" content="＠＠INSTRUMENT＠＠">
 <meta property="og:type" content="article">
 <meta property="og:title" content="＠＠TITLE＠＠｜＠＠SUBTITLE＠＠">
 <meta property="og:description" content="＠＠DESCRIPTION＠＠">
@@ -79,6 +81,21 @@
   footer .wrap { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
   footer a { color:var(--muted); text-decoration:none; }
   footer a:hover { color:var(--accent); }
+  .related { margin-top:8px; }
+  .related .blog-list { list-style:none; margin:0; padding:0; border-top:1px solid var(--line); }
+  .related .blog-list li { border-bottom:1px solid var(--line); }
+  .related .blog-list .note { display:flex; align-items:baseline; flex-wrap:wrap; gap:16px; padding:16px 2px; text-decoration:none; }
+  .related .blog-list .date { order:-2; flex:0 0 auto; font-size:12.5px; color:var(--muted); }
+  .related .blog-list strong { order:-1; flex:0 0 auto; font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif; font-weight:500; font-size:15px; color:var(--ink); transition:color .2s; }
+  .related .blog-list .d { order:0; flex:1 1 200px; font-size:13px; color:var(--muted); }
+  .related .blog-list .note::after { content:"→"; order:1; margin-left:auto; color:var(--accent); transition:color .2s; }
+  .related .blog-list .note:hover strong { color:var(--accent); }
+  .related .blog-list .note:hover::after { color:var(--accent); }
+  @media (max-width:640px) {
+    .related .blog-list .note { flex-direction:column; align-items:flex-start; gap:4px; }
+    .related .blog-list .date, .related .blog-list .d { flex:0 1 auto; }
+    .related .blog-list .note::after { display:none; }
+  }
 </style>
 </head>
 <div class="bar">
@@ -134,6 +151,9 @@
   <p class="more"><a class="cta" href="../pages/concert-calendar.html">演奏会カレンダーを見る</a></p>
 
   <p class="note" style="margin-top:32px">この記事は、AI（Claude）の助けを借りて下書きを作り、運営者が内容を確認して公開しています。紹介した記事の内容は、それぞれの筆者のものです。リンクは公開時点の情報です。</p>
+
+  <!-- RELATED:START -->
+  <!-- RELATED:END -->
 
 </main>
 

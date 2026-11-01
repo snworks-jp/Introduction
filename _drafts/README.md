@@ -30,6 +30,10 @@ SN WorksのBLOG（金管楽器の上達コラム）について、記事の「�
 **記事案に書く項目**
 - テーマ名
 - 候補タイトル
+- トピック（topic）: `long-tone` / `lip-slur` / `high-notes` / `tonguing` / `practice-menu` /
+  `lip-fatigue` / `records` のいずれか。当てはまらない場合は `other`
+- 対象楽器（instrument）: `trumpet` / `trombone` / `horn` / `euphonium` / `tuba` / `brass-band`（編成・合奏の話題）/
+  特定の楽器によらない記事は `all`
 - 引用元3本（それぞれ: 著者名／記事タイトル／URL／公開年月）
 - 要点3行（自分の言葉で、各40字前後）
 - 海外記事からのtips（1〜3個。自分の言葉で書き、原文の言い回しや例えは使わない。

@@ -19,96 +19,103 @@
 <link rel="canonical" href="https://snworks-jp.github.io/Introduction/pages/concert-calendar.html">
 <meta name="description" content="全国の演奏会を日付で探せるカレンダー。吹奏楽・オーケストラ・合唱・ジャズなど。投稿は確認してから掲載します。">
 <style>
-  :root { --bg:#eef1ff; --ink:#1a1a3c; --muted:#4f5078; --yellow:#ffd23f; --coral:#ff6b57; --blue:#3d5afe; --mint:#2fd39a; --violet:#8b5cf6; --paper:#fff; --line:#d9ddf3;
-    --round:"Hiragino Maru Gothic ProN","Yu Gothic","Meiryo",system-ui,sans-serif; }
+  :root { --bg:#141311; --surface:#1b1a17; --ink:#ece6da; --muted:#a39b8c; --line:#2c2a25; --frame:#3a372f; --accent:#c9a96a; --accent-hover:#d8bd83; --accent-ink:#141311; --soft:#1b1a17;
+    --round:"Hiragino Sans","Hiragino Maru Gothic ProN","Yu Gothic","Meiryo","Noto Sans JP",system-ui,sans-serif;
+    --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif; }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--bg); color:var(--ink); font-family:var(--round); line-height:1.7; overflow-x:clip; }
   button, select, input, textarea { font:inherit; color:inherit; }
-  a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible { outline:3px solid var(--blue); outline-offset:2px; }
+  a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible, textarea:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
   .wrap { max-width:1040px; margin:0 auto; padding:0 16px; }
-  .bar { position:sticky; top:0; z-index:20; background:var(--ink); border-bottom:4px solid var(--yellow); }
+  .bar { position:sticky; top:0; z-index:20; background:var(--bg); border-bottom:1px solid var(--line); }
   .bar .wrap { display:flex; align-items:center; justify-content:space-between; min-height:52px; gap:12px; }
-  .brand { color:#fff; font-weight:800; font-size:20px; text-decoration:none; }
+  .brand { color:var(--ink); font-family:"Cormorant Garamond","Times New Roman",serif; font-size:17px; letter-spacing:.3em; font-weight:400; text-decoration:none; }
   .mock[hidden]{display:none}
-  .mock { background:var(--yellow); color:var(--ink); font-size:12px; font-weight:800; padding:3px 10px; border-radius:999px; }
-  h1 { margin:28px 0 4px; font-size:clamp(26px,6vw,38px); line-height:1.3; font-weight:800; }
+  .mock { background:var(--accent); color:var(--accent-ink); font-size:12px; font-weight:700; padding:3px 10px; border-radius:999px; }
+  h1 { margin:28px 0 4px; font-family:var(--serif); font-size:clamp(26px,6vw,38px); line-height:1.3; font-weight:500; letter-spacing:.04em; }
   .lede { margin:0 0 18px; color:var(--muted); font-size:15px; }
   .tools { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:16px; }
   .chips { display:flex; flex-wrap:wrap; gap:8px; }
-  .chip { border:2px solid var(--ink); background:#fff; border-radius:999px; padding:3px 14px; font-size:13px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:6px; }
+  .chip { border:1px solid var(--line); background:transparent; color:var(--muted); border-radius:999px; padding:3px 14px; font-size:13px; font-weight:400; cursor:pointer; display:inline-flex; align-items:center; gap:6px; }
   .chip i { width:10px; height:10px; border-radius:50%; background:var(--c); display:inline-block; }
-  .chip[aria-pressed="false"] { opacity:.45; border-style:dashed; }
-  select { border:2px solid var(--ink); border-radius:999px; background:#fff; padding:3px 12px; font-size:13px; font-weight:700; }
-  .refresh { border:2px solid var(--ink); background:#fff; border-radius:999px; padding:5px 14px; font-size:13px; font-weight:800; cursor:pointer; }
-  .refresh small { display:block; font-size:10px; font-weight:700; color:var(--muted); line-height:1.2; }
+  .chip[aria-pressed="true"] { border-color:var(--accent); color:var(--ink); }
+  .chip[aria-pressed="false"] { opacity:.5; border-style:dashed; }
+  select { border:1px solid var(--line); border-radius:999px; background:transparent; color:var(--ink); padding:3px 12px; font-size:13px; font-weight:400; }
+  .refresh { border:1px solid var(--line); background:transparent; color:var(--ink); border-radius:999px; padding:5px 14px; font-size:13px; font-weight:400; cursor:pointer; }
+  .refresh small { display:block; font-size:10px; font-weight:400; color:var(--muted); line-height:1.2; }
   .refresh.busy span { display:inline-block; animation:spin .8s linear infinite; }
   @keyframes spin { to { transform:rotate(360deg); } }
   .spacer { flex:1; }
-  .post { border:0; background:var(--coral); color:#fff; font-weight:800; border-radius:999px; padding:9px 20px; cursor:pointer; box-shadow:0 4px 0 #c4442f; transition:transform .12s, box-shadow .12s; }
-  .post:hover { transform:translateY(2px); box-shadow:0 2px 0 #c4442f; }
-  .tabs { display:inline-flex; background:#fff; border:2px solid var(--ink); border-radius:999px; overflow:hidden; }
-  .tabs button { border:0; background:transparent; padding:5px 16px; font-weight:800; font-size:13px; cursor:pointer; }
-  .tabs button[aria-selected="true"] { background:var(--ink); color:#fff; }
+  .post { border:0; border-bottom:1px solid var(--accent); background:none; color:var(--ink); font-weight:400; border-radius:0; padding:9px 2px; cursor:pointer; box-shadow:none; transition:color .12s; }
+  .post:hover { color:var(--accent); transform:none; box-shadow:none; }
+  .tabs { display:inline-flex; background:transparent; border:1px solid var(--line); border-radius:999px; overflow:hidden; }
+  .tabs button { border:0; background:transparent; color:var(--muted); padding:5px 16px; font-weight:400; font-size:13px; cursor:pointer; }
+  .tabs button[aria-selected="true"] { background:var(--accent); color:var(--accent-ink); }
   .layout { display:grid; gap:18px; grid-template-columns:1fr; align-items:start; padding-bottom:40px; }
   @media (min-width:900px) { .layout { grid-template-columns:1.55fr 1fr; } }
-  .cal { background:var(--paper); border:2px solid var(--ink); border-radius:18px; padding:14px; box-shadow:6px 7px 0 var(--yellow); }
+  .cal { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px; box-shadow:none; }
   .calhead { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
-  .calhead h2 { margin:0; font-size:20px; }
+  .calhead h2 { margin:0; font-family:var(--serif); font-weight:500; font-size:20px; }
   .nav { display:flex; gap:6px; }
-  .nav button { width:36px; height:36px; border-radius:50%; border:2px solid var(--ink); background:#fff; font-weight:800; cursor:pointer; }
-  .nav button:hover { background:var(--yellow); }
+  .nav button { width:36px; height:36px; border-radius:50%; border:1px solid var(--line); background:transparent; color:var(--ink); font-weight:400; cursor:pointer; }
+  .nav button:hover { background:none; border-color:var(--accent); color:var(--accent); }
   .grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
-  .dow { text-align:center; font-size:12px; font-weight:800; color:var(--muted); padding:4px 0; }
-  .dow:first-child, .sun { color:#d4412c; } .dow:nth-child(7), .sat { color:var(--blue); }
-  .day { position:relative; min-height:74px; border:1.5px solid var(--line); border-radius:10px; background:#fff; padding:4px 5px; text-align:left; cursor:pointer; overflow:hidden; }
-  .day:hover { border-color:var(--ink); }
-  .day.off { opacity:.35; }
-  .day.today .n { background:var(--ink); color:#fff; }
-  .day.sel { border:2px solid var(--ink); background:#fff9dc; }
-  .n { display:inline-block; min-width:22px; text-align:center; border-radius:999px; font-size:12px; font-weight:800; }
-  .ev { display:none; margin-top:2px; font-size:11px; line-height:1.3; padding:1px 5px; border-radius:5px; background:var(--c); color:#14142e; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:700; }
+  .dow { text-align:center; font-size:12px; font-weight:700; color:var(--muted); padding:4px 0; }
+  .dow:first-child, .sun { color:#c08a7c; } .dow:nth-child(7), .sat { color:#8fa6c4; }
+  .day { position:relative; min-height:74px; border:1px solid var(--line); border-radius:12px; background:var(--surface); padding:4px 5px; text-align:left; cursor:pointer; overflow:hidden; }
+  .day:hover { border-color:var(--accent); }
+  .day.off { opacity:.3; }
+  .day.today .n { background:var(--accent); color:var(--accent-ink); }
+  .day.sel { border:1px solid var(--accent); background:var(--soft); }
+  .n { display:inline-block; min-width:22px; text-align:center; border-radius:999px; font-size:12px; font-weight:700; }
+  .ev { display:none; margin-top:2px; font-size:11px; line-height:1.3; padding:1px 5px 1px 6px; border-radius:3px; border-left:3px solid var(--c); background:var(--bg); color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:400; }
   .dots { display:flex; gap:3px; flex-wrap:wrap; margin-top:4px; }
   .dots i { width:8px; height:8px; border-radius:50%; background:var(--c); }
-  .more { display:none; font-size:11px; color:var(--muted); font-weight:700; }
+  .more { display:none; font-size:11px; color:var(--muted); font-weight:400; }
   @media (min-width:640px) { .day { min-height:96px; } .ev { display:block; } .dots { display:none; } .more { display:block; } }
-  .side h3 { margin:0 0 10px; font-size:18px; }
+  .side h3 { margin:0 0 10px; font-family:var(--serif); font-weight:500; font-size:18px; }
   .cards { list-style:none; margin:0; padding:0; display:grid; gap:14px; }
-  .card { background:#fff; border-radius:6px 6px 16px 6px; padding:14px 16px 14px; border-top:8px solid var(--c); box-shadow:0 8px 0 -5px rgba(26,26,60,.12), 0 14px 22px -14px rgba(26,26,60,.35); }
-  .card .g { display:inline-block; font-size:12px; font-weight:800; background:var(--c); padding:1px 10px; border-radius:999px; }
-  .card strong { display:block; margin-top:6px; font-size:16px; line-height:1.45; }
+  .card { background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--c); border-radius:12px; padding:14px 16px 14px; box-shadow:none; }
+  .card .g { display:inline-block; font-size:12px; font-weight:700; background:var(--c); color:#141311; padding:1px 10px; border-radius:999px; }
+  .card strong { display:block; margin-top:6px; font-family:var(--serif); font-weight:500; font-size:16px; line-height:1.45; }
   .card dl { margin:6px 0 0; display:grid; grid-template-columns:auto 1fr; gap:2px 10px; font-size:13.5px; color:var(--muted); }
-  .card dt { font-weight:800; color:var(--ink); } .card dd { margin:0; }
-  .empty { background:#fff; border:2px dashed var(--line); border-radius:14px; padding:22px; text-align:center; color:var(--muted); font-size:14px; }
+  .card dt { font-weight:700; color:var(--ink); } .card dd { margin:0; }
+  .empty { background:var(--surface); border:1px dashed var(--line); border-radius:12px; padding:22px; text-align:center; color:var(--muted); font-size:14px; }
   .note { margin-top:14px; font-size:12.5px; color:var(--muted); }
   /* 一覧表示 */
   .listview { display:none; }
-  .listview .dayhead { margin:16px 0 8px; font-size:15px; font-weight:800; }
+  .listview .dayhead { margin:16px 0 8px; font-family:var(--serif); font-weight:500; font-size:15px; }
   /* モーダル */
-  dialog { border:3px solid var(--ink); border-radius:20px; padding:0; width:min(560px,94vw); background:#fff; box-shadow:8px 9px 0 var(--yellow); }
-  dialog::backdrop { background:rgba(26,26,60,.55); }
-  .fh { display:flex; justify-content:space-between; align-items:center; padding:14px 18px; background:var(--ink); color:#fff; }
-  .fh h2 { margin:0; font-size:18px; }
-  .x { border:0; background:transparent; color:#fff; font-size:22px; cursor:pointer; }
+  dialog { border:1px solid var(--frame); border-radius:12px; padding:0; width:min(560px,94vw); background:var(--surface); color:var(--ink); box-shadow:none; }
+  dialog::backdrop { background:rgba(0,0,0,.6); }
+  .fh { display:flex; justify-content:space-between; align-items:center; padding:14px 18px; background:var(--bg); color:var(--ink); border-bottom:1px solid var(--line); }
+  .fh h2 { margin:0; font-family:var(--serif); font-weight:500; font-size:18px; }
+  .x { border:0; background:transparent; color:var(--muted); font-size:22px; cursor:pointer; }
+  .x:hover { color:var(--accent); }
   form { padding:16px 18px 18px; display:grid; gap:12px; }
-  label { font-size:13px; font-weight:800; display:grid; gap:4px; }
-  input, select.f, textarea { border:2px solid var(--line); border-radius:10px; padding:8px 10px; background:#fff; width:100%; }
+  label { font-size:13px; font-weight:400; color:var(--muted); display:grid; gap:4px; }
+  input, select.f, textarea { border:1px solid var(--line); border-radius:12px; padding:8px 10px; background:var(--bg); color:var(--ink); width:100%; }
+  input:focus, select.f:focus, textarea:focus { border-color:var(--accent); outline:none; }
   .row { display:grid; gap:12px; grid-template-columns:1fr 1fr; }
-  .warn { background:#fff4d6; border-radius:10px; padding:10px 12px; font-size:12.5px; line-height:1.6; }
-  .send { border:0; background:var(--blue); color:#fff; font-weight:800; border-radius:999px; padding:11px 20px; cursor:pointer; }
+  .warn { background:var(--soft); border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:12.5px; line-height:1.6; color:var(--muted); }
+  .send { border:0; background:var(--accent); color:var(--accent-ink); font-weight:600; border-radius:999px; padding:11px 20px; cursor:pointer; }
+  .send:hover { background:var(--accent-hover); }
   .hp { position:absolute; left:-9999px; width:1px; height:1px; opacity:0; }
   .send[disabled] { opacity:.6; cursor:wait; }
-  .card a.lk { display:inline-block; margin-top:8px; font-size:13px; font-weight:800; color:var(--blue); }
+  .card a.lk { display:inline-block; margin-top:8px; font-size:13px; font-weight:600; color:var(--accent); }
   .card .src { margin:4px 0 0; font-size:12px; color:var(--muted); }
   .state { text-align:center; color:var(--muted); padding:8px; font-size:14px; }
-  .toast { position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(20px); background:var(--ink); color:#fff; padding:10px 18px; border-radius:999px; font-size:13px; font-weight:700; opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; z-index:50; }
+  .toast { position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(20px); background:var(--surface); border:1px solid var(--frame); color:var(--ink); padding:10px 18px; border-radius:999px; font-size:13px; font-weight:400; opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; z-index:50; }
   .toast.on { opacity:1; transform:translateX(-50%); }
-  footer { padding:10px 0 40px; text-align:center; font-size:12.5px; color:var(--muted); }
+  footer { padding:10px 0 40px; text-align:center; font-size:12.5px; color:var(--muted); border-top:1px solid var(--line); margin-top:10px; }
+  footer a { color:inherit; text-decoration:none; }
+  footer a:hover { color:var(--accent); }
   @media (prefers-reduced-motion: reduce) { .post, .toast { transition:none; } .refresh.busy span { animation:none; } }
 </style>
 </head>
 <body>
 
-<div class="bar"><div class="wrap"><a class="brand" href="../">SN Works</a><span class="mock" id="demoBadge" hidden>サンプル表示</span></div></div>
+<div class="bar"><div class="wrap"><a class="brand" href="../">SN WORKS</a><span class="mock" id="demoBadge" hidden>サンプル表示</span></div></div>
 
 <main class="wrap">
   <h1>演奏会カレンダー</h1>
@@ -175,7 +182,7 @@
 // ★ Apps Script をウェブアプリとして公開したURLをここに入れる（空だとサンプル表示）
 const API_URL = "https://script.google.com/macros/s/AKfycbzChmP9zg4Dfhi9-nJwXjk52PpeUHCKR6QnizLfmC7dknPNIYEOCwWBeB8NX3NCoYTS/exec";
 
-const GENRES=[["吹奏楽","#ffd23f"],["オーケストラ","#7f95ff"],["合唱","#ff8d7d"],["ジャズ","#55e0b0"],["室内楽","#b79bff"],["その他","#ffb86b"]];
+const GENRES=[["吹奏楽","#c9a96a"],["オーケストラ","#8fa6c4"],["合唱","#b89aa8"],["ジャズ","#c08a5c"],["室内楽","#8fb3a0"],["その他","#a39b8c"]];
 const REGIONS={"北海道":["北海道"],"東北":["青森県","岩手県","宮城県","秋田県","山形県","福島県"],"関東":["茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県"],"中部":["新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県"],"近畿":["滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県"],"中国":["鳥取県","島根県","岡山県","広島県","山口県"],"四国":["徳島県","香川県","愛媛県","高知県"],"九州・沖縄":["福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"]};
 const prefRegion={};Object.entries(REGIONS).forEach(([r,ps])=>ps.forEach(p=>prefRegion[p]=r));
 const gc=Object.fromEntries(GENRES);

@@ -31,7 +31,11 @@
   .bar .wrap { display:flex; align-items:center; min-height:64px; }
   .brand { font-family:var(--eng); font-size:18px; letter-spacing:.3em; color:var(--ink); }
   h1 { font-family:var(--serif); font-weight:500; font-size:clamp(32px,6vw,52px); line-height:1.2; margin:56px 0 10px; color:var(--ink); }
-  .lede { margin:0 0 48px; color:var(--desc); font-size:15px; }
+  .lede { margin:0 0 20px; color:var(--desc); font-size:15px; }
+  .filters { margin:0 0 48px; font-size:13.5px; color:var(--muted); line-height:2.1; }
+  .filters .flabel { color:var(--gold); font-weight:600; margin-right:4px; }
+  .filters a { color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line); }
+  .filters a:hover { color:var(--gold); border-color:var(--gold); }
   .sec-block { padding:48px 0; border-top:1px solid var(--line); }
   .sec-block:first-of-type { border-top:none; padding-top:0; }
   .num { font-family:var(--eng); font-size:12px; letter-spacing:.3em; color:var(--gold); margin:0 0 16px; }
@@ -61,6 +65,10 @@
 <main class="wrap">
   <h1>BLOG</h1>
   <p class="lede">金管楽器の上達に役立つコラムなどを、載せています。</p>
+  <p class="filters">
+    <span class="flabel">悩み別：</span><a href="topic/records.html">記録・整理</a><br>
+    <span class="flabel">楽器別：</span><a href="instrument/trumpet.html">トランペット</a>
+  </p>
   <div class="sec-block">
     <p class="num">01 — COLUMN</p>
     <h2 class="sec">コラム</h2>
