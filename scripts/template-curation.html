@@ -96,6 +96,11 @@
     .related .blog-list .date, .related .blog-list .d { flex:0 1 auto; }
     .related .blog-list .note::after { display:none; }
   }
+  .gear { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin:32px 0; }
+  .gear h2 { margin:0 0 10px; font-size:17px; }
+  .gear ul { margin:0; padding-left:1.2em; }
+  .gear li { margin:4px 0; }
+  .aff-note { margin:10px 0 0; font-size:12px; color:var(--muted); }
 </style>
 </head>
 <div class="bar">
@@ -111,6 +116,10 @@
 </header>
 
 <main class="wrap">
+
+  <!-- 広告表示（依頼書013）。この記事にアフィリエイトリンクがある場合のみ残す。
+       ない場合はこの<p>ごと削除してよい。 -->
+  <p class="note" style="margin-top:28px">※この記事には広告（アフィリエイトリンク）が含まれます。</p>
 
   <!-- 【導入】悩みから入る。2〜3文。自分の言葉で。 -->
   <p style="margin-top:28px">＠＠導入＠＠</p>
@@ -146,6 +155,18 @@
 
   <p class="note">体の痛みや強い違和感があるときは、練習をやめて休み、顧問の先生や指導者、医師に相談してください。</p>
 
+  <!-- この記事で使った道具（依頼書013・任意）。紹介できる道具がある記事だけ残す。
+       ない場合はこの<section class="gear">ごと削除してよい（空の欄は出さない）。
+       リンクのclassは"aff"を使う（"src"はrelease.pyの重複チェック対象なので使わない）。
+       属性は rel="sponsored noopener noreferrer" target="_blank" を付ける。 -->
+  <section class="gear">
+    <h2>この記事で使った道具</h2>
+    <ul>
+      <li><a class="aff" href="＠＠URL＠＠" rel="sponsored noopener noreferrer" target="_blank">＠＠商品名＠＠</a> — ＠＠一言の説明＠＠</li>
+    </ul>
+    <p class="aff-note">※この欄には広告（アフィリエイトリンク）が含まれます。</p>
+  </section>
+
   <h2>近くの演奏会を、聴きに行ってみよう</h2>
   <p>上手な人の音を生で聴くのも、大きなヒントになります。吹奏楽やブラスバンドの演奏会は、「演奏会カレンダー」でも探せます。</p>
   <p class="more"><a class="cta" href="../pages/concert-calendar.html">演奏会カレンダーを見る</a></p>
@@ -154,6 +175,11 @@
 
   <!-- RELATED:START -->
   <!-- RELATED:END -->
+
+  <!-- Amazon規約の表示（依頼書013・必須・Amazonへのリンクがある記事のみ）。
+       Amazonリンクがない記事ではこの<p>ごと削除してよい。文言は最新のAmazonアソシエイト・
+       プログラム運営規約で確認すること。 -->
+  <p class="note" style="margin-top:24px">Amazonのアソシエイトとして、SN Worksは適格販売により収入を得ています。</p>
 
 </main>
 
