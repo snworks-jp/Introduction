@@ -14,7 +14,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-BASE = "https://snworks-jp.github.io/Introduction/"
+BASE = "https://snworks.jp/"
 JST = timezone(timedelta(hours=9))
 TOP_COUNT = 4          # トップページに出す最新記事の数
 MARK_START, MARK_END = "<!-- BLOG:START -->", "<!-- BLOG:END -->"
@@ -172,9 +172,9 @@ INDEX_TMPL = """<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>__TITLE__</title>
-<link rel="icon" href="/Introduction/favicon.ico" sizes="48x48">
-<link rel="icon" type="image/png" sizes="32x32" href="/Introduction/favicon-32.png">
-<link rel="apple-touch-icon" href="/Introduction/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="description" content="__DESC__">
 <link rel="canonical" href="__CANONICAL__">
 <style>
